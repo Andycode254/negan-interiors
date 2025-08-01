@@ -7,6 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <style>
+        .portfolio-image {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .portfolio-image.fade {
+            opacity: 0;
+        }
+        .portfolio-image.active {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body class="font-sans bg-gray-100">
     <!-- Navigation Bar -->
@@ -115,9 +126,9 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">Our Portfolio</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden portfolio-card">
                     <div class="relative">
-                        <img src="assets/images/portfolio1-1.jpg" alt="Executive Office Suite" class="w-full h-48 sm:h-64 object-cover portfolio-image" data-images='["assets/images/portfolio1-1.jpg","assets/images/portfolio1-2.jpg","assets/images/portfolio1-3.jpg"]' data-current="0">
+                        <img src="assets/images/portfolio1-1.jpeg" alt="Executive Office Suite" class="w-full h-48 sm:h-64 object-cover portfolio-image active" data-images='["assets/images/portfolio1-1.jpeg","assets/images/portfolio1-2.jpeg","assets/images/portfolio1-3.jpeg"]' data-current="0">
                         <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
                         <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
                     </div>
@@ -127,9 +138,9 @@
                         <a href="#" class="bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base">View Details</a>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden portfolio-card">
                     <div class="relative">
-                        <img src="assets/images/portfolio2-1.jpg" alt="Luxury Penthouse" class="w-full h-48 sm:h-64 object-cover portfolio-image" data-images='["assets/images/portfolio2-1.jpg","assets/images/portfolio2-2.jpg","assets/images/portfolio2-3.jpg"]' data-current="0">
+                        <img src="assets/images/portfolio2-1.jpeg" alt="Luxury Penthouse" class="w-full h-48 sm:h-64 object-cover portfolio-image active" data-images='["assets/images/portfolio2-1.jpeg","assets/images/portfolio2-2.jpeg","assets/images/portfolio2-3.jpeg"]' data-current="0">
                         <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
                         <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
                     </div>
@@ -139,9 +150,9 @@
                         <a href="#" class="bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base">View Details</a>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden portfolio-card">
                     <div class="relative">
-                        <img src="assets/images/portfolio3-1.jpg" alt="Corporate Boardroom" class="w-full h-48 sm:h-64 object-cover portfolio-image" data-images='["assets/images/portfolio3-1.jpg","assets/images/portfolio3-2.jpg","assets/images/portfolio3-3.jpg"]' data-current="0">
+                        <img src="assets/images/portfolio3-1.jpeg" alt="Corporate Boardroom" class="w-full h-48 sm:h-64 object-cover portfolio-image active" data-images='["assets/images/portfolio3-1.jpeg","assets/images/portfolio3-2.jpeg","assets/images/portfolio3-3.jpeg"]' data-current="0">
                         <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
                         <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
                     </div>
@@ -521,12 +532,13 @@
                 icon.classList.toggle('fa-times');
             });
 
-            // Portfolio Carousel
-            const portfolioCards = document.querySelectorAll('.portfolio-image');
+            // Portfolio Carousel with Auto-Slide
+            const portfolioCards = document.querySelectorAll('.portfolio-card');
             portfolioCards.forEach(card => {
+                const image = card.querySelector('.portfolio-image');
                 let images;
                 try {
-                    images = JSON.parse(card.dataset.images);
+                    images = JSON.parse(image.dataset.images);
                     if (!Array.isArray(images) || images.length === 0) {
                         console.error('Invalid or empty image array for portfolio card');
                         return;
@@ -535,18 +547,65 @@
                     console.error('Error parsing images for portfolio card:', e);
                     return;
                 }
-                let currentIndex = parseInt(card.dataset.current) || 0;
-                const prevBtn = card.parentElement.querySelector('.prev-btn');
-                const nextBtn = card.parentElement.querySelector('.next-btn');
+                let currentIndex = parseInt(image.dataset.current) || 0;
+                let autoSlideInterval = null;
+
+                const changeImage = (newIndex) => {
+                    image.classList.remove('active');
+                    image.classList.add('fade');
+                    setTimeout(() => {
+                        currentIndex = newIndex;
+                        image.src = images[currentIndex];
+                        image.dataset.current = currentIndex;
+                        image.classList.remove('fade');
+                        image.classList.add('active');
+                    }, 500); // Match transition duration
+                };
+
+                const prevBtn = card.querySelector('.prev-btn');
+                const nextBtn = card.querySelector('.next-btn');
+
                 prevBtn.addEventListener('click', () => {
-                    currentIndex = (currentIndex - 1 + images.length) % images.length;
-                    card.src = images[currentIndex];
-                    card.dataset.current = currentIndex;
+                    clearInterval(autoSlideInterval); // Pause auto-slide on manual interaction
+                    changeImage((currentIndex - 1 + images.length) % images.length);
+                    startAutoSlide(); // Restart auto-slide
                 });
+
                 nextBtn.addEventListener('click', () => {
-                    currentIndex = (currentIndex + 1) % images.length;
-                    card.src = images[currentIndex];
-                    card.dataset.current = currentIndex;
+                    clearInterval(autoSlideInterval); // Pause auto-slide on manual interaction
+                    changeImage((currentIndex + 1) % images.length);
+                    startAutoSlide(); // Restart auto-slide
+                });
+
+                const startAutoSlide = () => {
+                    autoSlideInterval = setInterval(() => {
+                        changeImage((currentIndex + 1) % images.length);
+                    }, 3000); // Change image every 3 seconds
+                };
+
+                const stopAutoSlide = () => {
+                    clearInterval(autoSlideInterval);
+                };
+
+                // Intersection Observer to start/stop auto-slide
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            startAutoSlide();
+                        } else {
+                            stopAutoSlide();
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(card);
+
+                // Pause auto-slide on hover
+                card.addEventListener('mouseenter', stopAutoSlide);
+                card.addEventListener('mouseleave', () => {
+                    if (document.querySelector('#portfolio').getBoundingClientRect().top <= window.innerHeight * 0.5) {
+                        startAutoSlide();
+                    }
                 });
             });
 
