@@ -10,138 +10,145 @@
 </head>
 <body class="font-sans bg-gray-100">
     <!-- Navigation Bar -->
-    <nav class="bg-gray-900 text-white fixed w-full z-10 top-0 shadow-lg">
+    <nav class="bg-gray-900 text-white fixed w-full z-20 top-0 shadow-lg">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center text-2xl font-bold">
+            <a href="#" class="flex items-center text-xl sm:text-2xl font-bold">
                 <img src="assets/images/logo.png" alt="Negan Interiors Logo" class="h-8 w-8 mr-2">
                 Negan Interiors
             </a>
-            <div class="space-x-6">
-                <a href="#home" class="hover:text-yellow-400 transition">Home</a>
-                <a href="#about" class="hover:text-yellow-400 transition">About</a>
-                <a href="#gallery" class="hover:text-yellow-400 transition">Gallery</a>
-                <a href="#portfolio" class="hover:text-yellow-400 transition">Portfolio</a>
-                <a href="#services" class="hover:text-yellow-400 transition">Services</a>
-                <a href="#templates" class="hover:text-yellow-400 transition">Templates</a>
-                <a href="#testimonials" class="hover:text-yellow-400 transition">Testimonials</a>
-                <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
-                <button id="getQuoteBtn" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">Get a Quote</button>
+            <div class="md:hidden">
+                <button id="menuToggle" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div id="navMenu" class="hidden md:flex md:space-x-6 md:items-center w-full md:w-auto">
+                <div class="flex flex-col md:flex-row md:space-x-6 space-y-4 md:space-y-0 mt-4 md:mt-0">
+                    <a href="#home" class="hover:text-yellow-400 transition text-center">Home</a>
+                    <a href="#about" class="hover:text-yellow-400 transition text-center">About</a>
+                    <a href="#gallery" class="hover:text-yellow-400 transition text-center">Gallery</a>
+                    <a href="#portfolio" class="hover:text-yellow-400 transition text-center">Portfolio</a>
+                    <a href="#services" class="hover:text-yellow-400 transition text-center">Services</a>
+                    <a href="#templates" class="hover:text-yellow-400 transition text-center">Templates</a>
+                    <a href="#testimonials" class="hover:text-yellow-400 transition text-center">Testimonials</a>
+                    <a href="#contact" class="hover:text-yellow-400 transition text-center">Contact</a>
+                    <button id="getQuoteBtn" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition md:ml-4">Get a Quote</button>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Quote Modal -->
     <div id="quoteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-            <h2 class="text-2xl font-bold mb-4">Get Your Quote</h2>
+        <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-md mx-4 max-h-[80vh] overflow-y-auto">
+            <h2 class="text-xl sm:text-2xl font-bold mb-4">Get Your Quote</h2>
             <div class="mb-4">
-                <label class="block text-gray-700 mb-1">Room Length (meters)</label>
-                <input type="number" id="length" class="w-full p-2 border rounded" required min="0" step="0.1">
+                <label class="block text-gray-700 mb-1 text-sm sm:text-base">Room Length (meters)</label>
+                <input type="number" id="length" class="w-full p-2 border rounded text-sm" required min="0" step="0.1">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 mb-1">Room Width (meters)</label>
-                <input type="number" id="width" class="w-full p-2 border rounded" required min="0" step="0.1">
+                <label class="block text-gray-700 mb-1 text-sm sm:text-base">Room Width (meters)</label>
+                <input type="number" id="width" class="w-full p-2 border rounded text-sm" required min="0" step="0.1">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 mb-1">Room Height (meters, for whole room)</label>
-                <input type="number" id="height" class="w-full p-2 border rounded" min="0" step="0.1">
+                <label class="block text-gray-700 mb-1 text-sm sm:text-base">Room Height (meters, for whole room)</label>
+                <input type="number" id="height" class="w-full p-2 border rounded text-sm" min="0" step="0.1">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 mb-1">Project Type</label>
-                <select id="projectType" class="w-full p-2 border rounded">
+                <label class="block text-gray-700 mb-1 text-sm sm:text-base">Project Type</label>
+                <select id="projectType" class="w-full p-2 border rounded text-sm">
                     <option value="ceiling">Ceiling Only</option>
                     <option value="whole">Whole Room</option>
                 </select>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 mb-1">
+                <label class="block text-gray-700 mb-1 text-sm sm:text-base">
                     <input type="checkbox" id="paintWork" class="mr-2">
                     Include Paint Work
                 </label>
             </div>
             <div id="quoteResult" class="mb-4 hidden">
-                <h3 class="text-lg font-semibold">Estimated Materials & Cost</h3>
-                <p id="materialOutput"></p>
-                <p id="costOutput"></p>
+                <h3 class="text-base sm:text-lg font-semibold">Estimated Materials & Cost</h3>
+                <p id="materialOutput" class="text-sm sm:text-base"></p>
+                <p id="costOutput" class="text-sm sm:text-base"></p>
             </div>
             <div class="flex justify-end space-x-4">
-                <button id="calculateQuote" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">Calculate</button>
-                <button id="closeQuoteModal" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Close</button>
+                <button id="calculateQuote" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base">Calculate</button>
+                <button id="closeQuoteModal" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition text-sm sm:text-base">Close</button>
             </div>
         </div>
     </div>
 
     <!-- Hero Section -->
     <section id="home" class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('assets/images/hero.jpg')">
-        <div class="text-center text-white bg-black bg-opacity-50 p-10 rounded">
-            <h1 class="text-5xl font-bold mb-4">Transform Your Space with Negan Interiors</h1>
-            <p class="text-xl mb-6">Luxury, Comfort, and Style in Every Detail</p>
-            <a href="#contact" class="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-500 transition">Get Started</a>
+        <div class="text-center text-white bg-black bg-opacity-50 p-6 sm:p-10 rounded w-full max-w-md sm:max-w-lg mx-4">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Transform Your Space with Negan Interiors</h1>
+            <p class="text-base sm:text-lg md:text-xl mb-6">Luxury, Comfort, and Style in Every Detail</p>
+            <a href="#contact" class="bg-yellow-400 text-black px-4 sm:px-6 py-2 sm:py-3 rounded hover:bg-yellow-500 transition text-sm sm:text-base">Get Started</a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-12 sm:py-20 bg-white">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6">About Negan Interiors</h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6">About Negan Interiors</h2>
+            <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
                 At Negan Interiors, we craft spaces that reflect your unique style and personality. With over a decade of experience, our team delivers bespoke designs that blend functionality with elegance.
             </p>
-            <img src="assets/images/about.jpg" alt="Negan Interiors Team" class="mx-auto rounded-lg shadow-lg max-w-md">
+            <img src="assets/images/about.jpg" alt="Negan Interiors Team" class="mx-auto rounded-lg shadow-lg w-full max-w-xs sm:max-w-md">
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-gray-100">
+    <section id="gallery" class="py-12 sm:py-20 bg-gray-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-10">Our Work</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <img src="assets/images/project1.jpg" alt="Project 1" class="rounded-lg shadow-lg hover:scale-105 transition">
-                <img src="assets/images/project2.jpg" alt="Project 2" class="rounded-lg shadow-lg hover:scale-105 transition">
-                <img src="assets/images/project3.jpg" alt="Project 3" class="rounded-lg shadow-lg hover:scale-105 transition">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">Our Work</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                <img src="assets/images/project1.jpg" alt="Project 1" class="rounded-lg shadow-lg w-full object-cover h-48 sm:h-64 hover:scale-105 transition">
+                <img src="assets/images/project2.jpg" alt="Project 2" class="rounded-lg shadow-lg w-full object-cover h-48 sm:h-64 hover:scale-105 transition">
+                <img src="assets/images/project3.jpg" alt="Project 3" class="rounded-lg shadow-lg w-full object-cover h-48 sm:h-64 hover:scale-105 transition">
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 bg-white">
+    <section id="portfolio" class="py-12 sm:py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-10">Our Portfolio</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">Our Portfolio</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
                     <div class="relative">
-                        <img src="assets/images/portfolio1-1.jpg" alt="Executive Office Suite" class="w-full h-64 object-cover portfolio-image" data-images='["assets/images/portfolio1-1.jpg","assets/images/portfolio1-2.jpg","assets/images/portfolio1-3.jpg"]' data-current="0">
-                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
-                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
+                        <img src="assets/images/portfolio1-1.jpg" alt="Executive Office Suite" class="w-full h-48 sm:h-64 object-cover portfolio-image" data-images='["assets/images/portfolio1-1.jpg","assets/images/portfolio1-2.jpg","assets/images/portfolio1-3.jpg"]' data-current="0">
+                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Executive Office Suite</h3>
-                        <p class="text-gray-600 mb-4">A modern corporate office with sleek lines, neutral tones, and custom lighting to enhance productivity and elegance.</p>
-                        <a href="#" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">View Details</a>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-2">Executive Office Suite</h3>
+                        <p class="text-gray-600 text-sm sm:text-base mb-4">A modern corporate office with sleek lines, neutral tones, and custom lighting to enhance productivity and elegance.</p>
+                        <a href="#" class="bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base">View Details</a>
                     </div>
                 </div>
                 <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
                     <div class="relative">
-                        <img src="assets/images/portfolio2-1.jpg" alt="Luxury Penthouse" class="w-full h-64 object-cover portfolio-image" data-images='["assets/images/portfolio2-1.jpg","assets/images/portfolio2-2.jpg","assets/images/portfolio2-3.jpg"]' data-current="0">
-                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
-                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
+                        <img src="assets/images/portfolio2-1.jpg" alt="Luxury Penthouse" class="w-full h-48 sm:h-64 object-cover portfolio-image" data-images='["assets/images/portfolio2-1.jpg","assets/images/portfolio2-2.jpg","assets/images/portfolio2-3.jpg"]' data-current="0">
+                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Luxury Penthouse</h3>
-                        <p class="text-gray-600 mb-4">A sophisticated residential space with bold accent walls, eco-friendly materials, and curated furniture for ultimate comfort.</p>
-                        <a href="#" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">View Details</a>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-2">Luxury Penthouse</h3>
+                        <p class="text-gray-600 text-sm sm:text-base mb-4">A sophisticated residential space with bold accent walls, eco-friendly materials, and curated furniture for ultimate comfort.</p>
+                        <a href="#" class="bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base">View Details</a>
                     </div>
                 </div>
                 <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
                     <div class="relative">
-                        <img src="assets/images/portfolio3-1.jpg" alt="Corporate Boardroom" class="w-full h-64 object-cover portfolio-image" data-images='["assets/images/portfolio3-1.jpg","assets/images/portfolio3-2.jpg","assets/images/portfolio3-3.jpg"]' data-current="0">
-                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
-                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
+                        <img src="assets/images/portfolio3-1.jpg" alt="Corporate Boardroom" class="w-full h-48 sm:h-64 object-cover portfolio-image" data-images='["assets/images/portfolio3-1.jpg","assets/images/portfolio3-2.jpg","assets/images/portfolio3-3.jpg"]' data-current="0">
+                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white px-2 sm:px-3 py-1 rounded hover:bg-opacity-75 transition next-btn"><i class="fas fa-chevron-right"></i></button>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Corporate Boardroom</h3>
-                        <p class="text-gray-600 mb-4">A high-tech boardroom with custom paint finishes and ergonomic design, tailored for executive meetings.</p>
-                        <a href="#" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">View Details</a>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-2">Corporate Boardroom</h3>
+                        <p class="text-gray-600 text-sm sm:text-base mb-4">A high-tech boardroom with custom paint finishes and ergonomic design, tailored for executive meetings.</p>
+                        <a href="#" class="bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base">View Details</a>
                     </div>
                 </div>
             </div>
@@ -149,232 +156,232 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-white">
+    <section id="services" class="py-12 sm:py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-10">Our Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6 bg-gray-50 rounded-lg shadow">
-                    <i class="fas fa-couch text-4xl text-yellow-400 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Interior Design</h3>
-                    <p class="text-gray-600">Custom designs tailored to your vision and lifestyle.</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">Our Services</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="text-center p-4 sm:p-6 bg-gray-50 rounded-lg shadow">
+                    <i class="fas fa-couch text-3xl sm:text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-2">Interior Design</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Custom designs tailored to your vision and lifestyle.</p>
                 </div>
-                <div class="text-center p-6 bg-gray-50 rounded-lg shadow">
-                    <i class="fas fa-ruler-combined text-4xl text-yellow-400 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Space Planning</h3>
-                    <p class="text-gray-600">Optimize your space for functionality and flow.</p>
+                <div class="text-center p-4 sm:p-6 bg-gray-50 rounded-lg shadow">
+                    <i class="fas fa-ruler-combined text-3xl sm:text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-2">Space Planning</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Optimize your space for functionality and flow.</p>
                 </div>
-                <div class="text-center p-6 bg-gray-50 rounded-lg shadow">
-                    <i class="fas fa-paint-roller text-4xl text-yellow-400 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Renovation</h3>
-                    <p class="text-gray-600">Transform your space with expert craftsmanship.</p>
+                <div class="text-center p-4 sm:p-6 bg-gray-50 rounded-lg shadow">
+                    <i class="fas fa-paint-roller text-3xl sm:text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-2">Renovation</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Transform your space with expert craftsmanship.</p>
                 </div>
-                <div class="text-center p-6 bg-gray-50 rounded-lg shadow">
-                    <img src="assets/images/scaffolding.jpeg" alt="Scaffolding" class="mx-auto h-16 w-16 object-cover mb-4">
-                    <h3 class="text-2xl font-semibold mb-2">Scaffolding for Hire</h3>
-                    <p class="text-gray-600 mb-4">Rent high-quality scaffolding for your interior projects, ensuring safety and efficiency.</p>
-                    <a href="tel:+254702344081" class="bg-blue-600 text-white px-6 py-2 rounded border border-blue-800 bg-gradient-to-r from-blue-600 to-blue-700 shadow-md hover:bg-blue-700 hover:shadow-lg transition transform hover:scale-105">Inquire Now</a>
+                <div class="text-center p-4 sm:p-6 bg-gray-50 rounded-lg shadow">
+                    <img src="assets/images/scaffolding.jpeg" alt="Scaffolding" class="mx-auto h-12 sm:h-16 w-12 sm:w-16 object-cover mb-4">
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-2">Scaffolding for Hire</h3>
+                    <p class="text-gray-600 text-sm sm:text-base mb-4">Rent high-quality scaffolding for your interior projects, ensuring safety and efficiency.</p>
+                    <a href="tel:+254702344081" class="bg-blue-600 text-white px-4 sm:px-6 py-2 rounded border border-blue-800 bg-gradient-to-r from-blue-600 to-blue-700 shadow-md hover:bg-blue-700 hover:shadow-lg transition transform hover:scale-105 text-sm sm:text-base">Inquire Now</a>
                 </div>
-                <div class="text-center p-6 bg-gray-50 rounded-lg shadow">
-                    <i class="fas fa-lightbulb text-4xl text-yellow-400 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Lighting Design</h3>
-                    <p class="text-gray-600">Illuminate your space with innovative lighting solutions.</p>
+                <div class="text-center p-4 sm:p-6 bg-gray-50 rounded-lg shadow">
+                    <i class="fas fa-lightbulb text-3xl sm:text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-2">Lighting Design</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Illuminate your space with innovative lighting solutions.</p>
                 </div>
-                <div class="text-center p-6 bg-gray-50 rounded-lg shadow">
-                    <i class="fas fa-tree text-4xl text-yellow-400 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Sustainable Design</h3>
-                    <p class="text-gray-600">Eco-friendly designs that respect the environment.</p>
+                <div class="text-center p-4 sm:p-6 bg-gray-50 rounded-lg shadow">
+                    <i class="fas fa-tree text-3xl sm:text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-2">Sustainable Design</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Eco-friendly designs that respect the environment.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Templates Section -->
-    <section id="templates" class="py-20 bg-gray-100">
+    <section id="templates" class="py-12 sm:py-20 bg-gray-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-10">Design Templates</h2>
-            <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-8">Explore our collection of 20 unique interior design templates to inspire your next project. Customize in 3D below!</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">Design Templates</h2>
+            <p class="text-base sm:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-8">Explore our collection of 20 unique interior design templates to inspire your next project. Customize in 3D below!</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template1.jpeg" alt="Modern Minimalist" class="w-full h-48 object-cover">
+                    <img src="assets/images/template1.jpeg" alt="Modern Minimalist" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Modern Minimalist</h3>
-                        <p class="text-gray-600 text-sm">Clean lines and neutral tones for a serene space.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="modern_minimalist">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Modern Minimalist</h3>
+                        <p class="text-gray-600 text-sm mb-2">Clean lines and neutral tones for a serene space.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="modern_minimalist">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template2.jpeg" alt="Bohemian Chic" class="w-full h-48 object-cover">
+                    <img src="assets/images/template2.jpeg" alt="Bohemian Chic" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Bohemian Chic</h3>
-                        <p class="text-gray-600 text-sm">Vibrant colors and eclectic patterns.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="bohemian_chic">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Bohemian Chic</h3>
+                        <p class="text-gray-600 text-sm mb-2">Vibrant colors and eclectic patterns.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="bohemian_chic">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template3.jpeg" alt="Industrial Loft" class="w-full h-48 object-cover">
+                    <img src="assets/images/template3.jpeg" alt="Industrial Loft" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Industrial Loft</h3>
-                        <p class="text-gray-600 text-sm">Raw materials and urban vibes.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="industrial_loft">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Industrial Loft</h3>
+                        <p class="text-gray-600 text-sm mb-2">Raw materials and urban vibes.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="industrial_loft">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template4.jpeg" alt="Scandinavian Simplicity" class="w-full h-48 object-cover">
+                    <img src="assets/images/template4.jpeg" alt="Scandinavian Simplicity" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Scandinavian Simplicity</h3>
-                        <p class="text-gray-600 text-sm">Bright, airy, and functional design.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="scandinavian_simplicity">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Scandinavian Simplicity</h3>
+                        <p class="text-gray-600 text-sm mb-2">Bright, airy, and functional design.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="scandinavian_simplicity">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template5.jpeg" alt="Mid-Century Modern" class="w-full h-48 object-cover">
+                    <img src="assets/images/template5.jpeg" alt="Mid-Century Modern" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Mid-Century Modern</h3>
-                        <p class="text-gray-600 text-sm">Retro shapes and bold accents.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="mid_century_modern">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Mid-Century Modern</h3>
+                        <p class="text-gray-600 text-sm mb-2">Retro shapes and bold accents.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="mid_century_modern">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template6.jpeg" alt="Coastal Retreat" class="w-full h-48 object-cover">
+                    <img src="assets/images/template6.jpeg" alt="Coastal Retreat" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Coastal Retreat</h3>
-                        <p class="text-gray-600 text-sm">Soft blues and natural textures.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="coastal_retreat">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Coastal Retreat</h3>
+                        <p class="text-gray-600 text-sm mb-2">Soft blues and natural textures.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="coastal_retreat">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template7.jpeg" alt="Rustic Charm" class="w-full h-48 object-cover">
+                    <img src="assets/images/template7.jpeg" alt="Rustic Charm" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Rustic Charm</h3>
-                        <p class="text-gray-600 text-sm">Warm woods and cozy elements.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="rustic_charm">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Rustic Charm</h3>
+                        <p class="text-gray-600 text-sm mb-2">Warm woods and cozy elements.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="rustic_charm">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template8.jpeg" alt="Art Deco Glam" class="w-full h-48 object-cover">
+                    <img src="assets/images/template8.jpeg" alt="Art Deco Glam" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Art Deco Glam</h3>
-                        <p class="text-gray-600 text-sm">Bold geometry and luxurious finishes.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="art_deco_glam">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Art Deco Glam</h3>
+                        <p class="text-gray-600 text-sm mb-2">Bold geometry and luxurious finishes.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="art_deco_glam">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template9.jpeg" alt="Contemporary Elegance" class="w-full h-48 object-cover">
+                    <img src="assets/images/template9.jpeg" alt="Contemporary Elegance" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Contemporary Elegance</h3>
-                        <p class="text-gray-600 text-sm">Sleek and sophisticated style.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="contemporary_elegance">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Contemporary Elegance</h3>
+                        <p class="text-gray-600 text-sm mb-2">Sleek and sophisticated style.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="contemporary_elegance">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template10.jpeg" alt="Vintage Eclectic" class="w-full h-48 object-cover">
+                    <img src="assets/images/template10.jpeg" alt="Vintage Eclectic" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Vintage Eclectic</h3>
-                        <p class="text-gray-600 text-sm">Mix of old and new for unique charm.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="vintage_eclectic">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Vintage Eclectic</h3>
+                        <p class="text-gray-600 text-sm mb-2">Mix of old and new for unique charm.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="vintage_eclectic">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template11.jpeg" alt="Urban Jungle" class="w-full h-48 object-cover">
+                    <img src="assets/images/template11.jpeg" alt="Urban Jungle" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Urban Jungle</h3>
-                        <p class="text-gray-600 text-sm">Lush greenery and natural elements.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="urban_jungle">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Urban Jungle</h3>
+                        <p class="text-gray-600 text-sm mb-2">Lush greenery and natural elements.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="urban_jungle">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template12.jpeg" alt="Classic Traditional" class="w-full h-48 object-cover">
+                    <img src="assets/images/template12.jpeg" alt="Classic Traditional" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Classic Traditional</h3>
-                        <p class="text-gray-600 text-sm">Timeless elegance and rich details.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="classic_traditional">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Classic Traditional</h3>
+                        <p class="text-gray-600 text-sm mb-2">Timeless elegance and rich details.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="classic_traditional">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template13.jpeg" alt="Zen Serenity" class="w-full h-48 object-cover">
+                    <img src="assets/images/template13.jpeg" alt="Zen Serenity" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Zen Serenity</h3>
-                        <p class="text-gray-600 text-sm">Calm and balanced minimalist design.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="zen_serenity">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Zen Serenity</h3>
+                        <p class="text-gray-600 text-sm mb-2">Calm and balanced minimalist design.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="zen_serenity">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template14.jpeg" alt="Gothic Revival" class="w-full h-48 object-cover">
+                    <img src="assets/images/template14.jpeg" alt="Gothic Revival" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Gothic Revival</h3>
-                        <p class="text-gray-600 text-sm">Dramatic arches and dark tones.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="gothic_revival">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Gothic Revival</h3>
+                        <p class="text-gray-600 text-sm mb-2">Dramatic arches and dark tones.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="gothic_revival">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template15.jpeg" alt="Tropical Oasis" class="w-full h-48 object-cover">
+                    <img src="assets/images/template15.jpeg" alt="Tropical Oasis" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Tropical Oasis</h3>
-                        <p class="text-gray-600 text-sm">Bright colors and lush patterns.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="tropical_oasis">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Tropical Oasis</h3>
+                        <p class="text-gray-600 text-sm mb-2">Bright colors and lush patterns.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="tropical_oasis">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template16.jpeg" alt="Farmhouse Comfort" class="w-full h-48 object-cover">
+                    <img src="assets/images/template16.jpeg" alt="Farmhouse Comfort" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Farmhouse Comfort</h3>
-                        <p class="text-gray-600 text-sm">Cozy and inviting rural style.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="farmhouse_comfort">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Farmhouse Comfort</h3>
+                        <p class="text-gray-600 text-sm mb-2">Cozy and inviting rural style.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="farmhouse_comfort">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template17.jpeg" alt="Futuristic Modern" class="w-full h-48 object-cover">
+                    <img src="assets/images/template17.jpeg" alt="Futuristic Modern" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Futuristic Modern</h3>
-                        <p class="text-gray-600 text-sm">Innovative and sleek technology.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="futuristic_modern">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Futuristic Modern</h3>
+                        <p class="text-gray-600 text-sm mb-2">Innovative and sleek technology.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="futuristic_modern">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template18.jpeg" alt="Mediterranean Villa" class="w-full h-48 object-cover">
+                    <img src="assets/images/template18.jpeg" alt="Mediterranean Villa" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Mediterranean Villa</h3>
-                        <p class="text-gray-600 text-sm">Warm tones and textured finishes.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="mediterranean_villa">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Mediterranean Villa</h3>
+                        <p class="text-gray-600 text-sm mb-2">Warm tones and textured finishes.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="mediterranean_villa">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template19.jpeg" alt="Eclectic Fusion" class="w-full h-48 object-cover">
+                    <img src="assets/images/template19.jpeg" alt="Eclectic Fusion" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Eclectic Fusion</h3>
-                        <p class="text-gray-600 text-sm">Bold mix of styles and cultures.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="eclectic_fusion">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Eclectic Fusion</h3>
+                        <p class="text-gray-600 text-sm mb-2">Bold mix of styles and cultures.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="eclectic_fusion">View in 3D</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/template20.jpeg" alt="Baroque Opulence" class="w-full h-48 object-cover">
+                    <img src="assets/images/template20.jpeg" alt="Baroque Opulence" class="w-full h-40 sm:h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Baroque Opulence</h3>
-                        <p class="text-gray-600 text-sm">Ornate details and luxurious textures.</p>
-                        <button class="view-3d-btn bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition mt-2" data-template="baroque_opulence">View in 3D</button>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Baroque Opulence</h3>
+                        <p class="text-gray-600 text-sm mb-2">Ornate details and luxurious textures.</p>
+                        <button class="view-3d-btn bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base" data-template="baroque_opulence">View in 3D</button>
                     </div>
                 </div>
             </div>
             <!-- 3D Viewer Modal -->
             <div id="viewerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-                <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full">
-                    <h2 class="text-2xl font-bold mb-4">Customize Template in 3D</h2>
-                    <div id="threeCanvas" class="w-full h-96 bg-gray-200"></div>
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-md sm:max-w-3xl mx-4 max-h-[80vh] overflow-y-auto">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4">Customize Template in 3D</h2>
+                    <div id="threeCanvas" class="w-full h-64 sm:h-96 bg-gray-200"></div>
                     <div class="mt-4">
-                        <label class="block text-gray-700 mb-1">Wall Color</label>
-                        <input type="color" id="wallColor" value="#ffffff" class="p-1 border rounded">
+                        <label class="block text-gray-700 mb-1 text-sm sm:text-base">Wall Color</label>
+                        <input type="color" id="wallColor" value="#ffffff" class="p-1 border rounded w-16 sm:w-20">
                     </div>
                     <div class="mt-4">
-                        <label class="block text-gray-700 mb-1">Furniture Style</label>
-                        <select id="furnitureStyle" class="w-full p-2 border rounded">
+                        <label class="block text-gray-700 mb-1 text-sm sm:text-base">Furniture Style</label>
+                        <select id="furnitureStyle" class="w-full p-2 border rounded text-sm sm:text-base">
                             <option value="modern">Modern</option>
                             <option value="classic">Classic</option>
                             <option value="rustic">Rustic</option>
                         </select>
                     </div>
                     <div class="flex justify-end space-x-4 mt-6">
-                        <button id="saveDesign" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">Save & Send</button>
-                        <button id="closeViewerModal" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Close</button>
+                        <button id="saveDesign" class="bg-yellow-400 text-black px-3 sm:px-4 py-2 rounded hover:bg-yellow-500 transition text-sm sm:text-base">Save & Send</button>
+                        <button id="closeViewerModal" class="bg-gray-600 text-white px-3 sm:px-4 py-2 rounded hover:bg-gray-700 transition text-sm sm:text-base">Close</button>
                     </div>
                 </div>
             </div>
@@ -382,91 +389,91 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-white">
+    <section id="testimonials" class="py-12 sm:py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-10">What Our Clients Say</h2>
-            <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-8">Hear from our satisfied clients about their experience with Negan Interiors. Your feedback means the world to us!</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-50 rounded-lg shadow-lg p-6 transform transition duration-300 hover:scale-105">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">What Our Clients Say</h2>
+            <p class="text-base sm:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-8">Hear from our satisfied clients about their experience with Negan Interiors. Your feedback means the world to us!</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-gray-50 rounded-lg shadow-lg p-4 sm:p-6 transform transition duration-300 hover:scale-105">
                     <div class="flex items-center mb-4">
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl"></i>
                     </div>
-                    <p class="text-gray-600 mb-4">"Negan Interiors transformed our living room into a stunning space that feels like us! Their attention to detail and professionalism made the process seamless. Highly recommend!"</p>
+                    <p class="text-gray-600 text-sm sm:text-base mb-4">"Negan Interiors transformed our living room into a stunning space that feels like us! Their attention to detail and professionalism made the process seamless. Highly recommend!"</p>
                     <div class="flex items-center">
-                        <img src="assets/images/client1.jpg" alt="Client Sarah" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <img src="assets/images/client1.jpg" alt="Client Sarah" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover mr-4">
                         <div>
-                            <p class="text-lg font-semibold">Sarah M.</p>
-                            <p class="text-gray-500 text-sm">Instagram Review</p>
+                            <p class="text-base sm:text-lg font-semibold">Sarah M.</p>
+                            <p class="text-gray-500 text-xs sm:text-sm">Instagram Review</p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-lg shadow-lg p-6 transform transition duration-300 hover:scale-105">
+                <div class="bg-gray-50 rounded-lg shadow-lg p-4 sm:p-6 transform transition duration-300 hover:scale-105">
                     <div class="flex items-center mb-4">
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl"></i>
                     </div>
-                    <p class="text-gray-600 mb-4">"The team at Negan Interiors exceeded our expectations with our office redesign. Their creative vision and timely execution were top-notch. Love the results!"</p>
+                    <p class="text-gray-600 text-sm sm:text-base mb-4">"The team at Negan Interiors exceeded our expectations with our office redesign. Their creative vision and timely execution were top-notch. Love the results!"</p>
                     <div class="flex items-center">
-                        <img src="assets/images/client2.jpg" alt="Client James" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <img src="assets/images/client2.jpg" alt="Client James" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover mr-4">
                         <div>
-                            <p class="text-lg font-semibold">James K.</p>
-                            <p class="text-gray-500 text-sm">Facebook Review</p>
+                            <p class="text-base sm:text-lg font-semibold">James K.</p>
+                            <p class="text-gray-500 text-xs sm:text-sm">Facebook Review</p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-lg shadow-lg p-6 transform transition duration-300 hover:scale-105">
+                <div class="bg-gray-50 rounded-lg shadow-lg p-4 sm:p-6 transform transition duration-300 hover:scale-105">
                     <div class="flex items-center mb-4">
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg sm:text-xl"></i>
                     </div>
-                    <p class="text-gray-600 mb-4">"Working with Negan Interiors was a joy! They turned our dream bedroom into reality with such elegance and care. Absolutely thrilled!"</p>
+                    <p class="text-gray-600 text-sm sm:text-base mb-4">"Working with Negan Interiors was a joy! They turned our dream bedroom into reality with such elegance and care. Absolutely thrilled!"</p>
                     <div class="flex items-center">
-                        <img src="assets/images/client3.jpg" alt="Client Aisha" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <img src="assets/images/client3.jpg" alt="Client Aisha" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover mr-4">
                         <div>
-                            <p class="text-lg font-semibold">Aisha T.</p>
-                            <p class="text-gray-500 text-sm">TikTok Review</p>
+                            <p class="text-base sm:text-lg font-semibold">Aisha T.</p>
+                            <p class="text-gray-500 text-xs sm:text-sm">TikTok Review</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-10">
-                <a href="#contact" class="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-500 transition">Share Your Experience</a>
+            <div class="text-center mt-8 sm:mt-10">
+                <a href="#contact" class="bg-yellow-400 text-black px-4 sm:px-6 py-2 sm:py-3 rounded hover:bg-yellow-500 transition text-sm sm:text-base">Share Your Experience</a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900 text-white">
+    <section id="contact" class="py-12 sm:py-20 bg-gray-900 text-white">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
-            <p class="text-lg mb-8 max-w-2xl mx-auto">Ready to elevate your space? Contact our team today for a consultation.</p>
-            <div class="flex justify-center space-x-8 mb-8">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6">Get in Touch</h2>
+            <p class="text-base sm:text-lg mb-8 max-w-2xl mx-auto">Ready to elevate your space? Contact our team today for a consultation.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8 mb-8">
                 <div class="flex items-center space-x-4">
-                    <img src="assets/images/agent1.jpg" alt="Agent Andy" class="w-16 h-16 rounded-full object-cover border-2 border-yellow-400 transform transition duration-300 hover:scale-110 hover:rotate-12">
+                    <img src="assets/images/agent1.jpg" alt="Agent Andy" class="w-12 sm:w-16 h-12 sm:h-16 rounded-full object-cover border-2 border-yellow-400 transform transition duration-300 hover:scale-110 hover:rotate-12">
                     <div>
-                        <p class="text-lg font-semibold">Andy</p>
-                        <p class="text-lg">Phone: <a href="tel:+254702344081" class="hover:text-yellow-400 transition">+254702344081</a></p>
-                        <a href="https://wa.me/+254702344081" class="inline-block mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+                        <p class="text-base sm:text-lg font-semibold">Andy</p>
+                        <p class="text-sm sm:text-lg">Phone: <a href="tel:+254702344081" class="hover:text-yellow-400 transition">+254702344081</a></p>
+                        <a href="https://wa.me/+254702344081" class="inline-block mt-2 bg-green-500 text-white px-3 sm:px-4 py-2 rounded hover:bg-green-600 transition text-sm sm:text-base">
                             <i class="fab fa-whatsapp mr-2"></i> WhatsApp
                         </a>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <img src="assets/images/agent2.jpg" alt="Agent Keffah" class="w-16 h-16 rounded-full object-cover border-2 border-yellow-400 transform transition duration-300 hover:scale-110 hover:rotate-12">
+                    <img src="assets/images/agent2.jpg" alt="Agent Keffah" class="w-12 sm:w-16 h-12 sm:h-16 rounded-full object-cover border-2 border-yellow-400 transform transition duration-300 hover:scale-110 hover:rotate-12">
                     <div>
-                        <p class="text-lg font-semibold">Keffah</p>
-                        <p class="text-lg">Phone: <a href="tel:+254790797744" class="hover:text-yellow-400 transition">+254790797744</a></p>
-                        <a href="https://wa.me/+254790797744" class="inline-block mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+                        <p class="text-base sm:text-lg font-semibold">Keffah</p>
+                        <p class="text-sm sm:text-lg">Phone: <a href="tel:+254790797744" class="hover:text-yellow-400 transition">+254790797744</a></p>
+                        <a href="https://wa.me/+254790797744" class="inline-block mt-2 bg-green-500 text-white px-3 sm:px-4 py-2 rounded hover:bg-green-600 transition text-sm sm:text-base">
                             <i class="fab fa-whatsapp mr-2"></i> WhatsApp
                         </a>
                     </div>
@@ -474,17 +481,17 @@
             </div>
             <form action="https://formspree.io/f/xovlllkv" method="POST" class="max-w-md mx-auto">
                 <div class="mb-4">
-                    <input type="text" name="name" placeholder="Your Name" class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none" required>
+                    <input type="text" name="name" placeholder="Your Name" class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none text-sm sm:text-base" required>
                 </div>
                 <div class="mb-4">
-                    <input type="email" name="email" placeholder="Your Email" class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none" required>
+                    <input type="email" name="email" placeholder="Your Email" class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none text-sm sm:text-base" required>
                 </div>
                 <div class="mb-4">
-                    <textarea name="message" placeholder="Your Message" class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none" rows="4" required></textarea>
+                    <textarea name="message" placeholder="Your Message" class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none text-sm sm:text-base" rows="4" required></textarea>
                 </div>
                 <input type="hidden" name="_subject" value="Negan Interiors Contact Form Submission">
                 <input type="text" name="_gotcha" style="display:none">
-                <button type="submit" class="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-500 transition">Submit</button>
+                <button type="submit" class="bg-yellow-400 text-black px-4 sm:px-6 py-2 sm:py-3 rounded hover:bg-yellow-500 transition text-sm sm:text-base">Submit</button>
             </form>
         </div>
     </section>
@@ -492,19 +499,29 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Negan Interiors. All rights reserved.</p>
+            <p class="text-sm sm:text-base">&copy; 2025 Negan Interiors. All rights reserved.</p>
             <div class="mt-4 space-x-4">
-                <a href="https://www.instagram.com/negan_interiors" target="_blank" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/negan.interiors" target="_blank" class="hover:text-yellow-400"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.facebook.com/YourFacebookPage" target="_blank" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/negan_interiors" target="_blank" class="hover:text-yellow-400 text-base sm:text-lg"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/negan.interiors" target="_blank" class="hover:text-yellow-400 text-base sm:text-lg"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/YourFacebookPage" target="_blank" class="hover:text-yellow-400 text-base sm:text-lg"><i class="fab fa-facebook"></i></a>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script>
-        // Portfolio Carousel
+        // Hamburger Menu Toggle
         document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navMenu = document.getElementById('navMenu');
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Portfolio Carousel
             const portfolioCards = document.querySelectorAll('.portfolio-image');
             portfolioCards.forEach(card => {
                 let images;
@@ -532,126 +549,125 @@
                     card.dataset.current = currentIndex;
                 });
             });
-        });
 
-        // Quote Calculator
-        const quoteModal = document.getElementById('quoteModal');
-        const getQuoteBtn = document.getElementById('getQuoteBtn');
-        const closeQuoteModal = document.getElementById('closeQuoteModal');
-        const calculateQuote = document.getElementById('calculateQuote');
-        const quoteResult = document.getElementById('quoteResult');
-        const materialOutput = document.getElementById('materialOutput');
-        const costOutput = document.getElementById('costOutput');
+            // Quote Calculator
+            const quoteModal = document.getElementById('quoteModal');
+            const getQuoteBtn = document.getElementById('getQuoteBtn');
+            const closeQuoteModal = document.getElementById('closeQuoteModal');
+            const calculateQuote = document.getElementById('calculateQuote');
+            const quoteResult = document.getElementById('quoteResult');
+            const materialOutput = document.getElementById('materialOutput');
+            const costOutput = document.getElementById('costOutput');
 
-        getQuoteBtn.addEventListener('click', () => {
-            quoteModal.classList.remove('hidden');
-        });
-
-        closeQuoteModal.addEventListener('click', () => {
-            quoteModal.classList.add('hidden');
-            quoteResult.classList.add('hidden');
-        });
-
-        calculateQuote.addEventListener('click', () => {
-            const length = parseFloat(document.getElementById('length').value);
-            const width = parseFloat(document.getElementById('width').value);
-            const height = parseFloat(document.getElementById('height').value) || 0;
-            const projectType = document.getElementById('projectType').value;
-            const paintWork = document.getElementById('paintWork').checked;
-
-            if (!length || !width || (projectType === 'whole' && !height)) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            let area, materials = {}, totalCost = 0;
-
-            if (projectType === 'ceiling') {
-                area = length * width;
-                materials.gypsum = `${(area / 2).toFixed(2)} sheets`;
-                materials.screws = `${Math.ceil(area * 10)} units`;
-                materials.tape = `${(area / 5).toFixed(2)} rolls`;
-                totalCost = (area * 1500) + (paintWork ? area * 500 : 0);
-            } else {
-                area = (2 * length * height) + (2 * width * height) + (length * width);
-                materials.gypsum = `${(area / 2).toFixed(2)} sheets`;
-                materials.screws = `${Math.ceil(area * 10)} units`;
-                materials.tape = `${(area / 5).toFixed(2)} rolls`;
-                materials.wood = `${(area / 10).toFixed(2)} meters`;
-                totalCost = (area * 2000) + (paintWork ? area * 500 : 0);
-            }
-
-            materialOutput.textContent = `Materials: Gypsum: ${materials.gypsum}, Screws: ${materials.screws}, Tape: ${materials.tape}${materials.wood ? `, Wood: ${materials.wood}` : ''}`;
-            costOutput.textContent = `Estimated Cost: KES ${totalCost.toFixed(2)}`;
-            quoteResult.classList.remove('hidden');
-        });
-
-        // 3D Viewer
-        const viewerModal = document.getElementById('viewerModal');
-        const closeViewerModal = document.getElementById('closeViewerModal');
-        const view3DBtns = document.querySelectorAll('.view-3d-btn');
-        const wallColor = document.getElementById('wallColor');
-        const furnitureStyle = document.getElementById('furnitureStyle');
-        const saveDesign = document.getElementById('saveDesign');
-
-        let scene, camera, renderer, room;
-
-        function init3DViewer(template) {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, 800 / 400, 0.1, 1000);
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(800, 400);
-            document.getElementById('threeCanvas').innerHTML = '';
-            document.getElementById('threeCanvas').appendChild(renderer.domElement);
-
-            const geometry = new THREE.BoxGeometry(10, 5, 10);
-            const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            room = new THREE.Mesh(geometry, material);
-            scene.add(room);
-
-            camera.position.z = 15;
-
-            const light = new THREE.AmbientLight(0xffffff, 0.8);
-            scene.add(light);
-
-            function animate() {
-                requestAnimationFrame(animate);
-                room.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
-            animate();
-        }
-
-        view3DBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const template = btn.dataset.template;
-                viewerModal.classList.remove('hidden');
-                init3DViewer(template);
+            getQuoteBtn.addEventListener('click', () => {
+                quoteModal.classList.remove('hidden');
             });
-        });
 
-        closeViewerModal.addEventListener('click', () => {
-            viewerModal.classList.add('hidden');
-        });
+            closeQuoteModal.addEventListener('click', () => {
+                quoteModal.classList.add('hidden');
+                quoteResult.classList.add('hidden');
+            });
 
-        wallColor.addEventListener('change', () => {
-            room.material.color.set(wallColor.value);
-        });
+            calculateQuote.addEventListener('click', () => {
+                const length = parseFloat(document.getElementById('length').value);
+                const width = parseFloat(document.getElementById('width').value);
+                const height = parseFloat(document.getElementById('height').value) || 0;
+                const projectType = document.getElementById('projectType').value;
+                const paintWork = document.getElementById('paintWork').checked;
 
-        furnitureStyle.addEventListener('change', () => {
-            // Placeholder for furniture style changes
-            console.log(`Furniture style changed to: ${furnitureStyle.value}`);
-        });
+                if (!length || !width || (projectType === 'whole' && !height)) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
 
-        saveDesign.addEventListener('click', () => {
-            const designData = {
-                template: document.querySelector('.view-3d-btn:not(.hidden)')?.dataset.template || 'unknown',
-                wallColor: wallColor.value,
-                furnitureStyle: furnitureStyle.value
-            };
-            console.log('Design saved:', designData);
-            alert('Design saved and sent to Negan Interiors!');
-            viewerModal.classList.add('hidden');
+                let area, materials = {}, totalCost = 0;
+
+                if (projectType === 'ceiling') {
+                    area = length * width;
+                    materials.gypsum = `${(area / 2).toFixed(2)} sheets`;
+                    materials.screws = `${Math.ceil(area * 10)} units`;
+                    materials.tape = `${(area / 5).toFixed(2)} rolls`;
+                    totalCost = (area * 1500) + (paintWork ? area * 500 : 0);
+                } else {
+                    area = (2 * length * height) + (2 * width * height) + (length * width);
+                    materials.gypsum = `${(area / 2).toFixed(2)} sheets`;
+                    materials.screws = `${Math.ceil(area * 10)} units`;
+                    materials.tape = `${(area / 5).toFixed(2)} rolls`;
+                    materials.wood = `${(area / 10).toFixed(2)} meters`;
+                    totalCost = (area * 2000) + (paintWork ? area * 500 : 0);
+                }
+
+                materialOutput.textContent = `Materials: Gypsum: ${materials.gypsum}, Screws: ${materials.screws}, Tape: ${materials.tape}${materials.wood ? `, Wood: ${materials.wood}` : ''}`;
+                costOutput.textContent = `Estimated Cost: KES ${totalCost.toFixed(2)}`;
+                quoteResult.classList.remove('hidden');
+            });
+
+            // 3D Viewer
+            const viewerModal = document.getElementById('viewerModal');
+            const closeViewerModal = document.getElementById('closeViewerModal');
+            const view3DBtns = document.querySelectorAll('.view-3d-btn');
+            const wallColor = document.getElementById('wallColor');
+            const furnitureStyle = document.getElementById('furnitureStyle');
+            const saveDesign = document.getElementById('saveDesign');
+
+            let scene, camera, renderer, room;
+
+            function init3DViewer(template) {
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth > 640 ? 800 / 400 : window.innerWidth / 300, 0.1, 1000);
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(window.innerWidth > 640 ? 800 : window.innerWidth - 32, window.innerWidth > 640 ? 400 : 300);
+                document.getElementById('threeCanvas').innerHTML = '';
+                document.getElementById('threeCanvas').appendChild(renderer.domElement);
+
+                const geometry = new THREE.BoxGeometry(10, 5, 10);
+                const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                room = new THREE.Mesh(geometry, material);
+                scene.add(room);
+
+                camera.position.z = 15;
+
+                const light = new THREE.AmbientLight(0xffffff, 0.8);
+                scene.add(light);
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    room.rotation.y += 0.01;
+                    renderer.render(scene, camera);
+                }
+                animate();
+            }
+
+            view3DBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const template = btn.dataset.template;
+                    viewerModal.classList.remove('hidden');
+                    init3DViewer(template);
+                });
+            });
+
+            closeViewerModal.addEventListener('click', () => {
+                viewerModal.classList.add('hidden');
+            });
+
+            wallColor.addEventListener('change', () => {
+                room.material.color.set(wallColor.value);
+            });
+
+            furnitureStyle.addEventListener('change', () => {
+                console.log(`Furniture style changed to: ${furnitureStyle.value}`);
+            });
+
+            saveDesign.addEventListener('click', () => {
+                const designData = {
+                    template: document.querySelector('.view-3d-btn:not(.hidden)')?.dataset.template || 'unknown',
+                    wallColor: wallColor.value,
+                    furnitureStyle: furnitureStyle.value
+                };
+                console.log('Design saved:', designData);
+                alert('Design saved and sent to Negan Interiors!');
+                viewerModal.classList.add('hidden');
+            });
         });
     </script>
 </body>
